@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="NegativeTestsSuite" verbose="1">
+    <test name="NegativeTests">
+        <!--        <groups>-->
+        <!--            <run>-->
+        <!--                <include name="smokeTests"></include>-->
+        <!--            </run>-->
+        <!--        </groups>-->
+        <classes>
+            <class name="com.example.selenium.NegativeTests">
+                <!--                <methods>-->
+                <!--                    <include name="incorrectUserNameTest"></include>-->
+                <!--                    <exclude name="incorrectPasswordTest"></exclude>-->
+                <!--                </methods>-->
+            </class>
+        </classes>
+    </test>
+</suite>

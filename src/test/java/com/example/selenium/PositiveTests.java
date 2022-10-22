@@ -24,7 +24,7 @@ public class PositiveTests {
     webDriver.get(url);
 
     // wait in order to see things happen slowly
-    sleepUntilSeconds(2);
+    Util.sleepUntilSeconds(2);
 
     // enter username and password
     WebElement userName = webDriver.findElement(By.id("username"));
@@ -33,13 +33,13 @@ public class PositiveTests {
     WebElement password = webDriver.findElement(By.xpath("//*[@id=\"password\"]"));
     password.sendKeys("SuperSecretPassword!");
 
-    sleepUntilSeconds(2);
+    Util.sleepUntilSeconds(2);
 
     // click login button
     WebElement loginButton = webDriver.findElement(By.xpath("//*[@id=\"login\"]/button/i"));
     loginButton.click();
 
-    sleepUntilSeconds(2);
+    Util.sleepUntilSeconds(2);
 
     // verifications:
     // new url
@@ -59,17 +59,10 @@ public class PositiveTests {
     String expectedMessage = "You logged into a secure area!";
     String actualMessage = successMessage.getText();
 
-    Assert.assertTrue(actualMessage.contains(expectedMessage), "Actual message is not same with expected message.");
+    Assert.assertTrue(actualMessage.contains(expectedMessage), "Actual message does not contain the expected message.");
 
     //close browser
     webDriver.quit();
   }
 
-  private void sleepUntilSeconds(long seconds) {
-    try {
-      Thread.sleep(seconds * 1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-  }
 }

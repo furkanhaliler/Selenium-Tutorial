@@ -1,0 +1,1 @@
+1- Tarayıcıda console üzerinde bir locator ile sayfa içerisindeki html elemanlarını bulmak için -> $x("locator") yazılabilir.
