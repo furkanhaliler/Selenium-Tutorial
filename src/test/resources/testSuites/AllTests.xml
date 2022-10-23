@@ -1,15 +1,20 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="AllTestsSuite" verbose="1" >
-    <test name="PositiveTests" >
+<suite name="AllTestsSuite" verbose="1">
+    <test name="PositiveTests">
         <classes>
-            <class name="com.example.selenium.PositiveTests" />
+            <class name="com.example.selenium.PositiveTests"/>
         </classes>
     </test>
 
     <test name="NegativeTests">
         <classes>
             <class name="com.example.selenium.NegativeTests"/>
+        </classes>
+    </test>
+    <test name="TennisRentalTest">
+        <classes>
+            <class name="com.example.selenium.TennisRental"></class>
         </classes>
     </test>
 </suite>
