@@ -4,23 +4,44 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class LoginTests {
+
+  WebDriver webDriver;
+
+  @BeforeTest(alwaysRun = true)
+  private void setUp() {
+    // creating driver
+    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+    webDriver = new ChromeDriver();
+
+    // maximize browser window
+    webDriver.manage().window().maximize();
+
+    // implicit wait
+    // webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+  }
+
+  @AfterMethod(alwaysRun = true)
+  private void shutdown() {
+
+    // close browser
+    webDriver.quit();
+  }
 
   @Test(
       priority = 1,
       groups = {"positiveTests", "smokeTests"})
   public void positiveLoginTest() {
-
-    // creating driver
-    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-    WebDriver webDriver = new ChromeDriver();
-
-    // maximize browser window
-    webDriver.manage().window().maximize();
 
     // open the test page
     String url = "http://the-internet.herokuapp.com/login";
@@ -38,8 +59,13 @@ public class LoginTests {
 
     Util.sleepUntilSeconds(2);
 
-    // click login button
+    // click login button, explicitly wait
     WebElement loginButton = webDriver.findElement(By.xpath("//*[@id=\"login\"]/button/i"));
+
+    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+
+    wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+
     loginButton.click();
 
     Util.sleepUntilSeconds(2);
@@ -65,9 +91,6 @@ public class LoginTests {
     Assert.assertTrue(
         actualMessage.contains(expectedMessage),
         "Actual message does not contain the expected message.");
-
-    // close browser
-    webDriver.quit();
   }
 
   @Parameters({"username", "password", "expectedMessage"})
@@ -75,11 +98,6 @@ public class LoginTests {
       priority = 2,
       groups = {"negativeTests", "smokeTests"})
   public void negativeLoginTests(String username, String password, String expectedMessage) {
-
-    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-    WebDriver webDriver = new ChromeDriver();
-
-    webDriver.manage().window().maximize();
 
     String url = "http://the-internet.herokuapp.com/login";
     webDriver.get(url);
@@ -100,19 +118,12 @@ public class LoginTests {
     Assert.assertTrue(
         actualMessage.contains(expectedMessage),
         "Actual message does not contain the expected message.");
-
-    webDriver.quit();
   }
   //  There is no need to have two separate username and password method as we can do it with
   // @Parameter annotation.
 
   //  @Test(priority = 1, groups = {"negativeTests", "smokeTests"})
   //  public void incorrectPasswordTest() {
-  //
-  //    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-  //    WebDriver webDriver = new ChromeDriver();
-  //
-  //    webDriver.manage().window().maximize();
   //
   //    String url = "http://the-internet.herokuapp.com/login";
   //    webDriver.get(url);
@@ -134,7 +145,6 @@ public class LoginTests {
   //    Assert.assertTrue(actualMessage.contains(expectedMessage), "Actual message does not contain
   // the expected message.");
   //
-  //    webDriver.quit();
   //  }
 
 }

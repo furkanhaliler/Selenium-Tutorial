@@ -1,1 +1,8 @@
-1- Tarayıcıda console üzerinde bir locator ile sayfa içerisindeki html elemanlarını bulmak için -> $x("locator") yazılabilir.
+1- Tarayıcıda console üzerinde bir locator ile sayfa içerisindeki html elemanlarını bulmak için -> $x("locator")
+yazılabilir.
+2- Implicit wait yöntemi sadece tek bir sefer oluşturulur, her yerde kullanılır. Explicit wait yöntemini ise duruma
+göre farklı örneklerini oluşturup kullanabiliriz.
+3- Implicit wait ile explicit wait aynı anda kullanılmamalıdır. Aksi taktirde beklenmedik şekilde duraksamalar
+yaşanabilir.
+4- Wait yöntemi Thread.sleep() yöntemi ile aynı değildir. Wait sadece bir şeyler ters gittiğinde devreye girer. Her
+şey normal çalıştığında bekleme yaşanmaz. Thread.sleep() yönteminde ise her halükarda beklemiş oluruz.
