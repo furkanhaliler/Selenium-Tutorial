@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TennisRental {
@@ -24,6 +25,12 @@ public class TennisRental {
         .findElement(By.xpath("/html/body/form/div[4]/div/div[3]/input"))
         .sendKeys("wrongpassword");
     webDriver.findElement(By.xpath("//*[@id=\"btnGirisYap\"]")).click();
+
+    String expectedUrl = "https://online.spor.istanbul/anasayfa";
+    String actualUrl = webDriver.getCurrentUrl();
+
+    Assert.assertEquals(expectedUrl, actualUrl, "Actual page url is not same with expected url.");
+
     String url2 = "https://online.spor.istanbul/satiskiralik";
     webDriver.get(url2);
 
